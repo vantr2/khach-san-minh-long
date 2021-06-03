@@ -20,7 +20,7 @@ const BookingForm = () => {
 
   let hi = useHistory();
   const handleBookingForm = async () => {
-    if (signedIn === "no") {
+    if (signedIn === "no" || !signedIn) {
       hi.push("/dang-nhap/#book");
     } else {
       if (!checkin) {

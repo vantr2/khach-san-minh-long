@@ -308,7 +308,7 @@ const Header = () => {
           </li>
         </ul>
 
-        {signedIn === "no" ? (
+        {signedIn === "no" || !signedIn ? (
           <button
             className="btn sign-up"
             onClick={() => {
