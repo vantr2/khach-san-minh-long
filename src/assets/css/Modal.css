@@ -1,0 +1,114 @@
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0); /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+  position: relative;
+  background-color: #fefefe;
+  margin: 4rem auto;
+  padding: 0;
+  border: 1px solid #888;
+  width: 60%;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  animation-name: animatetop;
+  animation-duration: 0.4s;
+}
+
+.modal-content-doi-mk {
+  position: relative;
+  background-color: #fefefe;
+  margin: 14rem 0rem 0rem 40rem;
+  padding: 0;
+  padding-bottom: 20px;
+  border: 1px solid #888;
+  width: 20%;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  animation-name: animatetop;
+  animation-duration: 0.4s;
+}
+
+/* The Close Button */
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* Modal Header */
+.modal-header {
+  padding: 2px 16px;
+  background-color: var(--yellow);
+  color: black;
+}
+
+/* Modal Body */
+.modal-body {
+  padding: 2px 16px;
+}
+
+.modal-body p {
+  color: black;
+}
+
+.modal-body .dpol-container {
+  display: flex;
+  flex-direction: column;
+  padding: 40px;
+}
+.modal-body .dpol-container .dpol-item {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 30px;
+  border-bottom: 1px solid #ccc;
+  padding: 10px 0px;
+}
+.dpol-time {
+  font-size: 1.3rem;
+}
+.dpol-action {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.dpol-info {
+  display: flex;
+  flex-direction: column;
+}
+/* Modal Footer */
+.modal-footer {
+  padding: 2px 16px;
+  background-color: var(--yellow);
+  color: black;
+}
+
+/* Add Animation */
+@keyframes animatetop {
+  from {
+    top: -300px;
+    opacity: 0;
+  }
+  to {
+    top: 0;
+    opacity: 1;
+  }
+}
