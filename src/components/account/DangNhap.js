@@ -127,8 +127,12 @@ const DangNhap = () => {
           onClick={handleLogin}
         ></button>
 
-        <a href="/">Trang chủ</a>
-        <a href="/dang-ki">Đăng kí tài khoản</a>
+        <div className="go-home a-link" onClick={() => hi.push("/")}>
+          Trang chủ
+        </div>
+        <div className="a-link" onClick={() => hi.push("/dang-ki")}>
+          Đăng kí
+        </div>
       </form>
     </div>
   );

@@ -282,10 +282,12 @@ const DangKi = () => {
           Đăng kí
         </button>
 
-        <a className="go-home" href="/">
+        <div className="go-home a-link" onClick={() => hi.push("/")}>
           Trang chủ
-        </a>
-        <a href="/dang-nhap">Đăng nhập</a>
+        </div>
+        <div className="a-link" onClick={() => hi.push("/dang-nhap")}>
+          Đăng nhập
+        </div>
       </form>
     </div>
   );

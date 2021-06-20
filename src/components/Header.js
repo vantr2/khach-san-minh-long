@@ -326,9 +326,12 @@ const Header = () => {
             className="btn log-in"
             onClick={() => {
               window.localStorage.setItem("kh", "no");
-
-              window.location.href = "/dang-nhap";
               alert("Đã đăng xuất");
+              hi.push("/");
+              const sideNav = document.getElementById("sidenav");
+              const modal = document.getElementById("modal");
+              sideNav.classList.remove("show");
+              modal.classList.remove("showModal");
             }}
           >
             Đăng xuất

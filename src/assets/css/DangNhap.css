@@ -131,8 +131,8 @@
   color: #000;
 }
 
-.login-form a,
-.register-form a {
+.login-form .a-link,
+.register-form .a-link {
   display: block;
   text-align: center;
   text-decoration: none;
@@ -142,10 +142,11 @@
   font-weight: 500;
   margin-bottom: 8px;
   transition: 0.2s linear;
+  cursor: pointer;
 }
 
-.login-form a:hover,
-.register-form a:hover {
+.login-form .a-link:hover,
+.register-form .a-link:hover {
   color: #111;
 }
 

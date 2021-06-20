@@ -3,7 +3,12 @@ import { useHistory } from "react-router";
 import KhachHangFinder from "../../apis/KhachHangFinder";
 import DatPhongOnlineFinder from "../../apis/DatPhongOnlineFinder";
 import "../../assets/css/Modal.css";
-import { NormalizeDate, convertTime } from "../../utils/DataHandler";
+import {
+  NormalizeDate,
+  convertTime,
+  isWeekend,
+  NumberFormat,
+} from "../../utils/DataHandler";
 const BookingForm = () => {
   const [checkout, setCheckOut] = useState("");
   const [checkin, setCheckIn] = useState("");
@@ -38,8 +43,58 @@ const BookingForm = () => {
         setTimeout(() => {
           setMsg("");
         }, 3000);
+      } else if (new Date(checkout) - new Date(checkin) < 0) {
+        setMsg("Thời gian nhận phòng và trả phòng không hợp lệ.");
+        setTimeout(() => {
+          setMsg("");
+        }, 3000);
       } else {
         try {
+          let tienphong = 0;
+
+          const songay =
+            (new Date(checkout) - new Date(checkin)) / (3600 * 1000 * 24);
+          if (songay < 1) {
+            const sogio = Math.ceil(
+              (new Date(checkout) - new Date(checkin)) / (3600 * 1000)
+            );
+            console.log(
+              (new Date(checkout) - new Date(checkin)) / (3600 * 1000)
+            );
+
+            if (loaiphong === "Phòng thường") {
+              tienphong = 200000 * sophong;
+            } else if (loaiphong === "Phòng thường 2") {
+              tienphong = 250000 * sophong;
+            } else if (loaiphong === "Phòng VIP") {
+              tienphong = 500000 * sophong;
+            } else if (loaiphong === "Phòng VIP 2") {
+              tienphong = 800000 * sophong;
+            }
+            tienphong *= sogio;
+            console.log(sogio, tienphong);
+          } else {
+            if (loaiphong === "Phòng thường") {
+              tienphong = 2000000 * sophong;
+            } else if (loaiphong === "Phòng thường 2") {
+              tienphong = 2300000 * sophong;
+            } else if (loaiphong === "Phòng VIP") {
+              tienphong = 3500000 * sophong;
+            } else if (loaiphong === "Phòng VIP 2") {
+              tienphong = 5000000 * sophong;
+            }
+            tienphong *= Math.ceil(songay);
+            console.log(songay, tienphong);
+          }
+
+          if (isWeekend(checkin, checkout) === 0) {
+            tienphong *= 1;
+          } else if (isWeekend(checkin, checkout) === 1) {
+            tienphong *= 1.4;
+          } else if (isWeekend(checkin, checkout) === 2) {
+            tienphong *= 1.65;
+          }
+
           const res_kh = await KhachHangFinder.get(`/get-account/${username}`);
 
           const res = await DatPhongOnlineFinder.post("/them", {
@@ -50,6 +105,7 @@ const BookingForm = () => {
             checkout,
             trecon,
             loaiphong,
+            tiendexuat: tienphong,
           });
           //   console.log(res.data.data.dponline);
           if (res.data.status === "ok") {
@@ -240,9 +296,10 @@ const BookingForm = () => {
             <option value="" disabled>
               Chọn loại phòng ...
             </option>
-            <option value="Phòng đơn">Phòng đơn</option>
-            <option value="Phòng đôi">Phòng đôi</option>
-            <option value="Gia đình">Gia đình</option>
+            <option value="Phòng thường">Phòng thường</option>
+            <option value="Phòng thường 2">Phòng thường 2</option>
+            <option value="Phòng VIP">Phòng VIP</option>
+            <option value="Phòng VIP 2">Phòng VIP 2</option>
           </select>
         </div>
         <div className="form-item">
@@ -305,6 +362,10 @@ const BookingForm = () => {
                         </div>
                         <div className="dpol-room-type">
                           Loại phòng: {don.loaiphong}
+                        </div>
+                        <div className="dpol-room-type">
+                          Số tiền dự kiến:{" "}
+                          <strong>{NumberFormat(don.tiendexuat)}</strong> VND
                         </div>
                       </div>
                       <div className="dpol-action">
